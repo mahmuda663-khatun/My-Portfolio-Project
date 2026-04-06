@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}About | MST. MAHMUDA KHATUN{% endblock %}
+
+{% block content %}
+    <section id="about" class="about-page section-padding">
+        <div class="container">
+            <h2 class="section-title reveal glow-text">My Story</h2>
+            <div class="about-content grid-2 reveal">
+                <div class="about-image-column">
+                    <div class="about-image-wrapper">
+                        {% if hero and hero.profile_image %}
+                            <img src="{{ hero.profile_image.url }}" alt="Mahmuda Khatun" class="about-img">
+                        {% else %}
+                            <div class="about-img-placeholder" style="width: 100%; height: 400px; background: var(--bg-alt); display: flex; align-items: center; justify-content: center; border-radius: 20px; font-weight: 700;">MAHMUDA</div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="about-text-column">
+                    <h3 class="glow-text">Crafting Digital Solutions</h3>
+                    <p style="font-size: 1.2rem; border-left: 3px solid var(--primary-color); padding-left: 1rem; margin-bottom: 2rem;">
+                        {% if about %}{{ about.paragraph_1 }}{% else %}I am a passionate developer committed to building scalable and user-friendly digital experiences.{% endif %}
+                    </p>
+                    <p>{% if about %}{{ about.paragraph_2 }}{% endif %}</p>
+                    
+                    <div class="stat-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 3rem;">
+                        <div class="stat-item glass-card" style="padding: 1.5rem; text-align: center;">
+                            <span class="stat-num glow-text">{{ about.years_experience|default:'3' }}+</span>
+                            <span class="stat-text">Experience</span>
+                        </div>
+                        <div class="stat-item glass-card" style="padding: 1.5rem; text-align: center;">
+                            <span class="stat-num glow-text">{{ about.projects_completed|default:'20' }}+</span>
+                            <span class="stat-text">Projects</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="achievements-section reveal" style="margin-top: 6rem; text-align: center;">
+                 <h3 class="glow-text" style="margin-bottom: 3rem;">Core Values</h3>
+                 <div class="values-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
+                      <div class="value-card glass-card" style="padding: 2.5rem;">
+                           <i class="fas fa-lightbulb" style="font-size: 2.5rem; color: var(--primary-color); margin-bottom: 1.5rem;"></i>
+                           <h4>Innnovation</h4>
+                           <p>Always pushing the boundaries of what's possible with code.</p>
+                      </div>
+                      <div class="value-card glass-card" style="padding: 2.5rem;">
+                           <i class="fas fa-shield-alt" style="font-size: 2.5rem; color: var(--secondary-color); margin-bottom: 1.5rem;"></i>
+                           <h4>Reliability</h4>
+                           <p>Ensuring every project is robust, secure, and performs flawlessly.</p>
+                      </div>
+                      <div class="value-card glass-card" style="padding: 2.5rem;">
+                           <i class="fas fa-rocket" style="font-size: 2.5rem; color: var(--accent-color); margin-bottom: 1.5rem;"></i>
+                           <h4>Speed</h4>
+                           <p>Optimized performances and timely deliveries for every client.</p>
+                      </div>
+                 </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

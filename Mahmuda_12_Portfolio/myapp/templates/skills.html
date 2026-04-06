@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Skills | MST. MAHMUDA KHATUN{% endblock %}
+
+{% block content %}
+    <section id="skills" class="skills-page section-padding">
+        <div class="container">
+            <h2 class="section-title reveal glow-text">Superpowers</h2>
+            <p class="text-center reveal" style="max-width: 600px; margin: 0 auto 5rem; color: var(--text-muted);">
+                 A diverse set of technologies I use to build modern web solutions. My expertise ranges from front-end design to complex backend logic.
+            </p>
+            
+            <div class="skills-list reveal">
+                {% if skills %}
+                    {% for skill in skills %}
+                    <div class="skill-card flex flex-col items-center justify-center text-center p-6 bg-glass border border-glass transition-all hover:scale-110" data-tilt data-tilt-max="20" data-tilt-speed="1000">
+                        <div class="skill-icon-outer" style="font-size: 3.5rem; color: {% if skill.is_backend %}var(--secondary-color){% else %}var(--primary-color){% endif %}; margin-bottom: 1.5rem;">
+                             <i class="{{ skill.icon_class }}"></i>
+                        </div>
+                        <h4 class="glow-text" style="font-size: 1.2rem; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 1px;">{{ skill.name }}</h4>
+                        <span style="font-size: 0.85rem; color: var(--text-muted);">{{ skill.percentage }}% Mastery</span>
+                        <!-- Hidden progress bar for script compatibility if needed, but visually hidden -->
+                        <div class="progress-bar" style="display:none;"><div class="progress" style="width: {{ skill.percentage }}%;"></div></div>
+                        
+                        <!-- Floating particles effect around specific skills can be done with CSS later -->
+                        <div class="skill-glow-bg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle, {% if skill.is_backend %}var(--secondary-color){% else %}var(--primary-color){% endif %} 0%, transparent 60%); opacity: 0.1; pointer-events: none; border-radius: 50%;"></div>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="skill-card"><h4>No skills found</h4></div>
+                {% endif %}
+            </div>
+            
+            <div class="skills-extra reveal" style="margin-top: 8rem;">
+                 <h3 class="text-center glow-text" style="margin-bottom: 4rem;">Development Workflow</h3>
+                 <div class="workflow-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem;">
+                      <div class="workflow-item text-center">
+                           <div style="font-size: 2.5rem; color: var(--primary-color); margin-bottom: 1rem;">1</div>
+                           <h5>Plan</h5>
+                           <p>Architecting robust solutions.</p>
+                      </div>
+                      <div class="workflow-item text-center">
+                           <div style="font-size: 2.5rem; color: var(--secondary-color); margin-bottom: 1rem;">2</div>
+                           <h5>Build</h5>
+                           <p>Writing clean, efficient code.</p>
+                      </div>
+                      <div class="workflow-item text-center">
+                           <div style="font-size: 2.5rem; color: var(--accent-color); margin-bottom: 1rem;">3</div>
+                           <h5>Deploy</h5>
+                           <p>Scaling to the global audience.</p>
+                      </div>
+                 </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

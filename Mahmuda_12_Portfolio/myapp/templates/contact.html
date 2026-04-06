@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Contact | MST. MAHMUDA KHATUN{% endblock %}
+
+{% block content %}
+    <section id="contact" class="contact-page section-padding">
+        <div class="container">
+            <h2 class="section-title reveal" style="text-align: center;">Get In Touch</h2>
+            <div class="contact-wrapper grid-2 reveal" style="margin-top: 3rem;">
+                <div class="contact-info">
+                    <h3>Let's talk about your project!</h3>
+                    <p>I'm currently available for freelance projects or full-time opportunities. Drop me a message and let's create something awesome.</p>
+                    <div class="info-item" style="margin-top: 2rem; display: flex; align-items: center; gap: 1rem; background: var(--glass-bg); padding: 1rem; border: 1px solid var(--glass-border); border-radius: 10px;">
+                        <i class="fas fa-envelope" style="color: var(--primary-color); font-size: 1.5rem;"></i>
+                        <div>
+                             <h4 style="font-size: 0.9rem; color: #a0a0a0;">Email</h4>
+                             <span>mahmudak663@gmail.com</span>
+                        </div>
+                    </div>
+                    <div class="info-item" style="margin-top: 1rem; display: flex; align-items: center; gap: 1rem; background: var(--glass-bg); padding: 1rem; border: 1px solid var(--glass-border); border-radius: 10px;">
+                        <i class="fas fa-phone" style="color: var(--primary-color); font-size: 1.5rem;"></i>
+                        <div>
+                             <h4 style="font-size: 0.9rem; color: #a0a0a0;">Phone</h4>
+                             <span>+01611518541</span>
+                        </div>
+                    </div>
+                    <div class="info-item" style="margin-top: 1rem; display: flex; align-items: center; gap: 1rem; background: var(--glass-bg); padding: 1rem; border: 1px solid var(--glass-border); border-radius: 10px;">
+                        <i class="fas fa-map-marker-alt" style="color: var(--primary-color); font-size: 1.5rem;"></i>
+                        <div>
+                             <h4 style="font-size: 0.9rem; color: #a0a0a0;">Location</h4>
+                             <span>Darussalam, Mirpur, Dhaka-1216</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-container" style="background: var(--glass-bg); padding: 2rem; border-radius: 15px; border: 1px solid var(--glass-border); box-shadow: var(--shadow-small);">
+                    <form class="contact-form">
+                        <div class="form-group" style="margin-bottom: 1.5rem;">
+                            <input type="text" placeholder="Your Name" required style="width: 100%; padding: 1rem; background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); border-radius: 8px; color: white;">
+                        </div>
+                        <div class="form-group" style="margin-bottom: 1.5rem;">
+                            <input type="email" placeholder="Your Email" required style="width: 100%; padding: 1rem; background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); border-radius: 8px; color: white;">
+                        </div>
+                        <div class="form-group" style="margin-bottom: 1.5rem;">
+                            <textarea rows="5" placeholder="Your Message" required style="width: 100%; padding: 1rem; background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); border-radius: 8px; color: white;"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block" style="width: 100%;">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

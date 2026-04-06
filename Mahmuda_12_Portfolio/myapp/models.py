@@ -2,6 +2,7 @@ from django.db import models
 
 class Skill(models.Model):
     name = models.CharField(max_length=50)
+    icon_class = models.CharField(max_length=100, default="fab fa-html5", help_text="FontAwesome class e.g. fab fa-react")
     percentage = models.IntegerField(default=50)
     is_backend = models.BooleanField(default=False)
 

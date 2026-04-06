@@ -1,0 +1,97 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Software Developer | Portfolio{% endblock %}</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body class="dark-mode">
+    <!-- Custom Cursor -->
+    <div class="cursor-dot" data-cursor></div>
+    <div class="cursor-outline" data-cursor></div>
+
+    <!-- Scroll Progress Indicator -->
+    <div id="scroll-progress"></div>
+
+    <!-- Animated Canvas Background -->
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="navbar">
+        <div class="nav-container">
+            <a href="{% url 'index' %}" class="logo">MST<span>.</span>MAHMUDA KHATUN</a>
+            <ul class="nav-links">
+                <li><a href="{% url 'index' %}" class="nav-link {% if request.resolver_match.url_name == 'index' %}active{% endif %}">Home</a></li>
+                <li><a href="{% url 'about' %}" class="nav-link {% if request.resolver_match.url_name == 'about' %}active{% endif %}">About</a></li>
+                <li><a href="{% url 'skills' %}" class="nav-link {% if request.resolver_match.url_name == 'skills' %}active{% endif %}">Skills</a></li>
+                <li><a href="{% url 'projects' %}" class="nav-link {% if request.resolver_match.url_name == 'projects' %}active{% endif %}">Projects</a></li>
+                <li><a href="{% url 'experience' %}" class="nav-link {% if request.resolver_match.url_name == 'experience' %}active{% endif %}">Experience</a></li>
+                <li><a href="{% url 'contact' %}" class="nav-link {% if request.resolver_match.url_name == 'contact' %}active{% endif %}">Contact</a></li>
+            </ul>
+            <div class="theme-toggle" id="theme-toggle">
+                <i class="fas fa-sun"></i>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <div class="footer-logo">MST<span>.</span>MAHMUDA</div>
+                <p>Building digital experiences that matter. Specialized in modern web development with a focus on performance and aesthetics.</p>
+                <div class="footer-socials">
+                    {% if social_links %}
+                        {% for link in social_links %}
+                        <a href="{{ link.url }}" target="_blank"><i class="{{ link.icon_class }}"></i></a>
+                        {% endfor %}
+                    {% else %}
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="{% url 'index' %}">Home</a></li>
+                    <li><a href="{% url 'about' %}">About</a></li>
+                    <li><a href="{% url 'skills' %}">Skills</a></li>
+                    <li><a href="{% url 'projects' %}">Projects</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4>Contact Info</h4>
+                <p><i class="fas fa-envelope"></i> mahmudak663@gmail.com</p>
+                <p><i class="fas fa-phone"></i> +01611518541</p>
+                <p><i class="fas fa-map-marker-alt"></i> Dhaka, Bangladesh</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 MST. MAHMUDA KHATUN. Developed with <i class="fas fa-heart" style="color: var(--accent-color);"></i></p>
+        </div>
+        <a href="#" class="back-to-top" id="back-to-top"><i class="fas fa-arrow-up"></i></a>
+    </footer>
+
+    <!-- Vanilla Tilt for hover 3D effect -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+    <script src="{% static 'js/script.js' %}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

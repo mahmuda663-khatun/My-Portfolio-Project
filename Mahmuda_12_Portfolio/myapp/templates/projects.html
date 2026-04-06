@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Projects | MST. MAHMUDA KHATUN{% endblock %}
+
+{% block content %}
+    <section id="projects" class="projects-page section-padding">
+        <div class="container">
+            <h1 class="section-title reveal glow-text" style="font-size: 4rem; margin-bottom: 2rem;">My Projects</h1>
+            
+            <!-- Category Filter (Simulated with simple tags) -->
+            <div class="project-filter-btns reveal" style="display: flex; justify-content: center; gap: 1rem; margin-bottom: 5rem;">
+                 <button class="btn btn-secondary active-filter" style="min-width: 100px; padding: 0.5rem 1.5rem; background: var(--primary-color); border: none; color: #fff; box-shadow: 0 0 15px var(--primary-color);">All</button>
+                 <button class="btn btn-secondary" style="min-width: 100px; padding: 0.5rem 1.5rem; background: rgba(255,255,255,0.05); color: var(--text-muted);">Web App</button>
+                 <button class="btn btn-secondary" style="min-width: 100px; padding: 0.5rem 1.5rem; background: rgba(255,255,255,0.05); color: var(--text-muted);">UI Design</button>
+                 <button class="btn btn-secondary" style="min-width: 100px; padding: 0.5rem 1.5rem; background: rgba(255,255,255,0.05); color: var(--text-muted);">Backend/API</button>
+            </div>
+            
+            <div class="project-grid reveal">
+                {% if projects %}
+                    {% for project in projects %}
+                    <div class="project-card neon-border advanced-hover" data-tilt data-tilt-max="5" data-tilt-glare data-tilt-max-glare="0.2" style="position: relative;">
+                        <!-- Glow Layer (Advanced Feature) -->
+                        <div class="card-glow"></div>
+                        
+                        <!-- Status Badge (Advanced Feature) -->
+                        <div class="status-badge" style="position: absolute; top: 1rem; right: 1rem; padding: 0.3rem 0.8rem; background: rgba(34, 197, 94, 0.2); border: 1px solid #22c55e; color: #22c55e; border-radius: 5px; font-size: 0.7rem; font-weight: 800; z-index: 10;">
+                             <i class="fas fa-circle" style="font-size: 0.5rem; margin-right: 3px;"></i> COMPLETED
+                        </div>
+
+                        <div class="project-img-container" style="position: relative; overflow: hidden; height: 220px;">
+                            {% if project.image %}
+                                <img src="{{ project.image.url }}" alt="{{ project.title }}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1); filter: grayscale(20%);">
+                            {% else %}
+                                <div class="project-img-placeholder" style="width: 100%; height: 100%; background: #0f172a; display: flex; align-items: center; justify-content: center; font-weight: 700;">{{ project.title }}</div>
+                            {% endif %}
+                            <div class="overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to top, rgba(15,23,42,0.95) 0%, transparent 60%);"></div>
+                            
+                            <!-- Category Badge -->
+                            <div style="position: absolute; bottom: 1rem; left: 1rem; padding: 0.3rem 0.8rem; background: rgba(99, 102, 241, 0.2); border: 1px solid var(--primary-color); border-radius: 5px; font-size: 0.75rem; color: var(--primary-color); font-weight: 700; text-transform: uppercase;">
+                                {% if "django" in project.tech_stack|lower %}Backend/API{% elif "react" in project.tech_stack|lower %}Frontend{% else %}Web App{% endif %}
+                            </div>
+                        </div>
+                        <div class="project-content" style="padding: 2.5rem; background: #020617; border-bottom-left-radius: inherit; border-bottom-right-radius: inherit;">
+                            <h3 class="glow-text" style="font-size: 1.6rem; margin-bottom: 0.5rem; letter-spacing: -0.5px;">{{ project.title }}</h3>
+                            <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem; font-size: 0.8rem; color: var(--text-muted);">
+                                 <span><i class="fas fa-calendar-alt"></i> 2026</span>
+                                 <span><i class="fas fa-clock"></i> 3 Weeks</span>
+                            </div>
+                            <p style="font-size: 0.95rem; line-height: 1.7; color: #94a3b8; margin-bottom: 2rem; height: 3.4rem; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">
+                                {{ project.description }}
+                            </p>
+                            
+                            <div class="tech-stack" style="margin-bottom: 2rem; display: flex; flex-wrap: wrap; gap: 0.8rem;">
+                                {% for tech in project.tech_stack_list %}
+                                    <span class="tech-tag" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); color: #e2e8f0; padding: 0.4rem 0.8rem; border-radius: 6px; font-size: 0.75rem; font-weight: 600; transition: all 0.3s ease;">{{ tech }}</span>
+                                {% endfor %}
+                            </div>
+                            
+                            <div class="project-links" style="display: flex; gap: 1rem;">
+                                {% if project.github_link %}
+                                <a href="{{ project.github_link }}" target="_blank" class="btn-advanced" style="flex: 1; padding: 0.8rem; background: #1e293b; color: #fff; border-radius: 12px; font-weight: 700; text-align: center; border: 1px solid rgba(255,255,255,0.1); font-size: 0.85rem;">
+                                     <i class="fab fa-github"></i> Source
+                                </a>
+                                {% endif %}
+                                {% if project.live_link %}
+                                <a href="{{ project.live_link }}" target="_blank" class="btn-advanced live-btn" style="flex: 1; padding: 0.8rem; background: linear-gradient(135deg, #6366f1, #a855f7); color: #fff; border-radius: 12px; font-weight: 700; text-align: center; font-size: 0.85rem; box-shadow: 0 5px 15px rgba(99, 102, 241, 0.4);">
+                                     <i class="fas fa-eye"></i> Preview
+                                </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <p class="text-center" style="grid-column: 1 / -1;">No projects added yet.</p>
+                {% endif %}
+            </div>
+            
+            <div class="cta-banner reveal" style="margin-top: 8rem; padding: 5rem; text-align: center; background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(168, 85, 247, 0.1) 100%); border: 1px solid var(--border-color); border-radius: 30px;">
+                 <h2 class="glow-text">Got a project in mind?</h2>
+                 <p style="margin-top: 1rem; color: var(--text-muted);">Let's collaborate and turn your ideas into functional, beautiful realities.</p>
+                 <a href="{% url 'contact' %}" class="btn btn-primary" style="margin-top: 2rem;">Start a Discussion</a>
+            </div>
+        </div>
+    </section>
+{% endblock %}
