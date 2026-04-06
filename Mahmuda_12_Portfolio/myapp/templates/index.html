@@ -1,0 +1,320 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Software Developer | Portfolio</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body class="dark-mode">
+    <!-- Custom Cursor -->
+    <div class="cursor-dot" data-cursor></div>
+    <div class="cursor-outline" data-cursor></div>
+
+    <!-- Scroll Progress Indicator -->
+    <div id="scroll-progress"></div>
+
+    <!-- Animated Canvas Background -->
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="navbar">
+        <div class="nav-container">
+            <a href="#hero" class="logo">MST<span>.</span>MAHMUDA KHATUN</a>
+            <ul class="nav-links">
+                <li><a href="#hero" class="nav-link">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#timeline" class="nav-link">Experience</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="theme-toggle" id="theme-toggle">
+                <i class="fas fa-sun"></i>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+        <div class="hero-content reveal">
+            <h3 class="subtitle">{% if hero %}{{ hero.subtitle }}{% else %}Hello, I'm{% endif %}</h3>
+            <h1 class="title">{% if hero %}{{ hero.name }}{% else %}John Doe{% endif %}</h1>
+            <h2 class="role">I'm a <span class="typed-text"></span><span class="cursor-blink">|</span></h2>
+            <p class="description">
+                {% if hero %}{{ hero.description }}{% else %}I build clean, scalable, and responsive web applications. Let's create something amazing together.{% endif %}
+            </p>
+            <div class="hero-buttons">
+                <a href="#contact" class="btn btn-primary">Hire Me</a>
+                <a href="{% if hero and hero.cv_link %}{{ hero.cv_link }}{% else %}#{% endif %}" class="btn btn-secondary">Download CV</a>
+            </div>
+            <div class="social-links">
+                {% if social_links %}
+                    {% for link in social_links %}
+                    <a href="{{ link.url }}" target="_blank"><i class="{{ link.icon_class }}"></i></a>
+                    {% endfor %}
+                {% else %}
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                {% endif %}
+            </div>
+        </div>
+        <div class="hero-image reveal">
+            <div class="spinning-ring"></div>
+            <div class="blob-shape">
+                {% if hero and hero.profile_image %}
+                <img src="{{ hero.profile_image.url }}" alt="Profile Image" style="width:100%; height:100%; object-fit:cover; border-radius:inherit; pointer-events:none;">
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about section-padding">
+        <div class="container">
+            <h2 class="section-title reveal">{% if about %}{{ about.title }}{% else %}About Me{% endif %}</h2>
+            <div class="about-content grid-2 reveal">
+                <div class="about-text">
+                    <h3>My Passion & Purpose</h3>
+                    <p>{% if about %}{{ about.paragraph_1 }}{% else %}I am a dedicated Software Developer with a deep passion for building intuitive, high-performance web applications.{% endif %}</p>
+                    <p>{% if about %}{{ about.paragraph_2 }}{% endif %}</p>
+                    
+                    <div class="about-info-list" style="margin-top: 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div style="display: flex; align-items: center; gap: 0.8rem; font-weight: 600;">
+                            <i class="fas fa-check-circle" style="color: var(--primary-color);"></i>
+                            <span>Problem Solver</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 0.8rem; font-weight: 600;">
+                            <i class="fas fa-check-circle" style="color: var(--primary-color);"></i>
+                            <span>Quick Learner</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 0.8rem; font-weight: 600;">
+                            <i class="fas fa-check-circle" style="color: var(--primary-color);"></i>
+                            <span>Team Player</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 0.8rem; font-weight: 600;">
+                            <i class="fas fa-check-circle" style="color: var(--primary-color);"></i>
+                            <span>Detail Oriented</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-stats">
+                    <div class="stat-box">
+                        <i class="fas fa-briefcase" style="font-size: 2rem; color: var(--primary-color); margin-bottom: 1rem; display: block;"></i>
+                        <span class="stat-num">{% if about %}{{ about.years_experience }}{% else %}0{% endif %}+</span>
+                        <span class="stat-text">Years Experience</span>
+                    </div>
+                    <div class="stat-box">
+                        <i class="fas fa-project-diagram" style="font-size: 2rem; color: var(--primary-color); margin-bottom: 1rem; display: block;"></i>
+                        <span class="stat-num">{% if about %}{{ about.projects_completed }}{% else %}0{% endif %}+</span>
+                        <span class="stat-text">Projects Done</span>
+                    </div>
+                    <div class="stat-box">
+                        <i class="fas fa-users" style="font-size: 2rem; color: var(--primary-color); margin-bottom: 1rem; display: block;"></i>
+                        <span class="stat-num">{% if about %}{{ about.happy_clients }}{% else %}0{% endif %}+</span>
+                        <span class="stat-text">Happy Clients</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills section-padding bg-alt">
+        <div class="container">
+            <h2 class="section-title reveal">My Skills</h2>
+            <div class="skills-wrapper grid-2 reveal">
+                <div class="skill-category">
+                    <h3>Frontend</h3>
+                    <div class="skill-bar">
+                        <div class="skill-info">
+                            <span>HTML & CSS</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="progress-bar"><div class="progress" style="width: 90%;"></div></div>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-info">
+                            <span>JavaScript</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="progress-bar"><div class="progress" style="width: 85%;"></div></div>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-info">
+                            <span>React</span>
+                            <span>80%</span>
+                        </div>
+                        <div class="progress-bar"><div class="progress" style="width: 80%;"></div></div>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Backend</h3>
+                    <div class="skill-bar">
+                        <div class="skill-info">
+                            <span>Python / Django</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="progress-bar"><div class="progress" style="width: 85%;"></div></div>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-info">
+                            <span>Node.js</span>
+                            <span>70%</span>
+                        </div>
+                        <div class="progress-bar"><div class="progress" style="width: 70%;"></div></div>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-info">
+                            <span>SQL / Databases</span>
+                            <span>80%</span>
+                        </div>
+                        <div class="progress-bar"><div class="progress" style="width: 80%;"></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects section-padding">
+        <div class="container">
+            <h2 class="section-title reveal">Featured Projects</h2>
+            <div class="project-grid reveal">
+                {% if projects %}
+                    {% for project in projects %}
+                    <div class="project-card">
+                        {% if project.image %}
+                        <img src="{{ project.image.url }}" alt="{{ project.title }}" style="width: 100%; height: 200px; object-fit: cover; border-top-left-radius: inherit; border-top-right-radius: inherit;">
+                        {% else %}
+                        <div class="project-img-placeholder">{{ project.title }}</div>
+                        {% endif %}
+                        <div class="project-content">
+                            <h3>{{ project.title }}</h3>
+                            <p>{{ project.description }}</p>
+                            <div class="tech-stack">
+                                {% for tech in project.tech_stack_list %}
+                                <span>{{ tech }}</span>
+                                {% endfor %}
+                            </div>
+                            <div class="project-links">
+                                {% if project.live_link %}
+                                <a href="{{ project.live_link }}" target="_blank"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                                {% endif %}
+                                {% if project.github_link %}
+                                <a href="{{ project.github_link }}" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <p style="text-align: center; grid-column: 1 / -1;">No projects added yet. Please add them from the admin panel.</p>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline / Experience Section -->
+    <section id="timeline" class="timeline-section section-padding bg-alt">
+        <div class="container">
+            <h2 class="section-title reveal">Experience & Education</h2>
+            <div class="timeline reveal">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h4>Senior Software Engineer</h4>
+                        <span class="timeline-date">2021 - Present | TechCorp Inc.</span>
+                        <p>Leading frontend development teams and migrating legacy platforms to modern React architectures.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h4>Web Developer</h4>
+                        <span class="timeline-date">2018 - 2021 | Creative Agency</span>
+                        <p>Developed dynamic user-facing features and integrated responsive templates for various clients.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h4>B.S. in Computer Science</h4>
+                        <span class="timeline-date">2014 - 2018 | Tech University</span>
+                        <p>Graduated with honors. Involved in multiple coding hackathons and software architecture clubs.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact section-padding">
+        <div class="container">
+            <h2 class="section-title reveal">Get In Touch</h2>
+            <div class="contact-wrapper grid-2 reveal">
+                <div class="contact-info">
+                    <h3>Let's talk about your project!</h3>
+                    <p>I'm currently available for freelance projects or full-time opportunities. Drop me a message and let's create something awesome.</p>
+                    <div class="info-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>mahmudak663@gmail.com</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+01611518541</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Darussalam,Mirpur,Dhaka-1216</span>
+                    </div>
+                </div>
+                <form class="contact-form">
+                    <div class="form-group">
+                        <input type="text" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea rows="5" placeholder="Your Message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-logo">MST<span>.</span>MAHMUDA KHATUN</div>
+            <div class="social-links">
+                {% if social_links %}
+                    {% for link in social_links %}
+                    <a href="{{ link.url }}" target="_blank"><i class="{{ link.icon_class }}"></i></a>
+                    {% endfor %}
+                {% else %}
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                {% endif %}
+            </div>
+            <p class="copyright">&copy; 2026 MST. MAHMUDA KHATUN. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Vanilla Tilt for hover 3D effect -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>
